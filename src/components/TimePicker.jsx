@@ -2,7 +2,6 @@ import * as React from "react";
 import dayjs from "dayjs";
 import date from "date-and-time";
 
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { TimeField } from "@mui/x-date-pickers/TimeField";
@@ -16,6 +15,7 @@ export default function TimePicker() {
   const [clockin, setClockin] = React.useState(dayjs("2022-04-17T08:22"));
   const [clockout, setClockout] = React.useState(dayjs(new Date()));
   const [lunch, setLunch] = React.useState(1.8e6);
+  const lunchLabel = "Lunch Break (minutes)";
 
   React.useEffect(() => {
     addTime();
@@ -38,8 +38,9 @@ export default function TimePicker() {
         label="Starting Time"
         value={clockin}
         onChange={updateClockin}
+        sx={{ margin: 1 }}
       />
-      <TimeField label="Clockout Time" value={clockout} />
+      <TimeField label="Clockout Time" value={clockout} sx={{ margin: 1 }} />
       <FormControl>
         <InputLabel id="demo-simple-select-label"></InputLabel>
         <Select
@@ -47,13 +48,14 @@ export default function TimePicker() {
           id="demo-simple-select"
           value={lunch}
           onChange={updateLunch}
+          sx={{ marginLeft: 1, marginTop: 1 }}
         >
           <MenuItem value={0}>0</MenuItem>
           <MenuItem value={1.8e6}>30</MenuItem>
           <MenuItem value={2.7e6}>45</MenuItem>
           <MenuItem value={3.6e6}>60</MenuItem>
         </Select>
-        <FormHelperText>Lunch Break in Minutes</FormHelperText>
+        <FormHelperText>{lunchLabel}</FormHelperText>
       </FormControl>
     </LocalizationProvider>
   );
