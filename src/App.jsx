@@ -1,6 +1,8 @@
+import "./App.css";
 import { useState } from "react";
 import Select from "./components/Select";
 import Time from "./components/Time";
+import { FaQuestionCircle } from "react-icons/fa";
 
 function App() {
   const [startTime, setStartTime] = useState("08:57");
@@ -19,8 +21,10 @@ function App() {
     // Add 8 hours to start hours for total shift
     const totalStartMinutes = (startHours + 8) * 60 + startMinutes;
     const endTotalMinutes = totalStartMinutes + duration;
-    const endHours = Math.floor(endTotalMinutes / 60);
-    const endMinutes = endTotalMinutes % 60;
+    // Adjust the total minutes to be within 24 hours
+    const adjustedEndTotalMinutes = endTotalMinutes % (24 * 60);
+    const endHours = Math.floor(adjustedEndTotalMinutes / 60);
+    const endMinutes = adjustedEndTotalMinutes % 60;
     const endTime = `${String(endHours).padStart(2, "0")}:${String(
       endMinutes
     ).padStart(2, "0")}`;
@@ -35,11 +39,9 @@ function App() {
   ];
 
   return (
-    <div className="container mx-auto mt-8">
-      <div className="max-w-md mx-auto p-8 bg-gray-50 rounded-lg shadow-md">
-        <h1 className="text-2xl font-extrabold mb-8 text-center text-gray-900 leading-tight">
-          Effortless Workday
-        </h1>
+    <div className="container mx-auto mt-8 ">
+      <div className="max-w-md mx-auto p-8 bg-gray-100 rounded-lg shadow-md">
+        <h1 className="text-2xl font-bold mb-8 text-center ">Clockout</h1>
         <div className="mb-6">
           <Time
             value={startTime}
@@ -58,6 +60,15 @@ function App() {
         <div>
           <Time value={calculateEndTime()} label="Clockout Time" readOnly />
         </div>
+        <button
+          onClick={() =>
+            alert(
+              "Cesar never learned his basic addition. So this app enables him to not learn simple math by spoon feeding him a clockout time."
+            )
+          }
+        >
+          <FaQuestionCircle className="fill-yellow-500" />
+        </button>
       </div>
     </div>
   );
