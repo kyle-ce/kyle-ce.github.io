@@ -60,13 +60,7 @@ function App() {
         <div>
           <Time value={calculateEndTime()} label="Clockout Time" readOnly />
         </div>
-        <button
-          onClick={() =>
-            alert(
-              "Cesar never learned his basic addition. So this app enables him to not learn simple math by spoon feeding him a clockout time."
-            )
-          }
-        >
+        <button onClick={() => alert("Cesar needs to learn basic math.")}>
           <FaQuestionCircle className="fill-yellow-500" />
         </button>
       </div>
